@@ -6,7 +6,7 @@
 /*   By: leonel <leonel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:34:49 by leonel            #+#    #+#             */
-/*   Updated: 2024/06/24 17:40:10 by leonel           ###   ########.fr       */
+/*   Updated: 2024/06/25 14:03:49 by leonel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 	while (strchr(buffer, '\n') == NULL)
 	{
 			temp = ft_strdup(buffer, ft_strlen(buffer));
-			printf("J'ai read %ld bytes \n", read(fd, buffer, BUFFER_SIZE));
+			read(fd, buffer, BUFFER_SIZE);
 			temp = ft_strjoin(temp, buffer);
 	}
 	if ((pos = ft_strchr_int(temp, '\n')) >= 0)
@@ -117,15 +117,29 @@ char	*get_next_line(int fd)
 		line = strndup(temp, pos + 1);
 	}
 	pos++;
-	if (ft_strchr_int(buffer, '\n') < 0)
+	if (ft_strchr_int(buffer, '\n') > 0)
 	{
-		while (buffer[pos])
+		if (ft_strlen(temp) > BUFFER_SIZE)
 		{
-			buffer[i] = buffer[pos];
-			pos++;
-			i++;
+			while (temp[pos])
+			{
+				temp[i] = temp[pos];
+				pos++;
+				i++;
+			}
+		temp[i] = '\0';
+		strcpy(buffer, temp);
 		}
+		else
+		{
+			while (buffer[pos])
+			{
+				buffer[i] = buffer[pos];
+				pos++;
+				i++;
+			}
 		buffer[i] = '\0';
+		}
 	}
 	return (line);
 }
