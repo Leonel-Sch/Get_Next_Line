@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leonel <leonel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lscheupl <lscheupl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:34:49 by leonel            #+#    #+#             */
-/*   Updated: 2024/06/25 14:03:49 by leonel           ###   ########.fr       */
+/*   Updated: 2024/07/01 19:37:26 by lscheupl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strdup(const char *s, int len)
 	char	*dup;
 
 	i = 0;
-	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + len) + 1);
+	dup = (char *)malloc(sizeof(char) * (strlen(s) + len) + 1);
 	while (s[i])
 	{
 		dup[i] = s[i];
@@ -58,7 +58,7 @@ char	*ft_strndup(const char *s, int nb)
 	char	*dup;
 
 	i = 0;
-	dup = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
+	dup = (char *)malloc(sizeof(char) * strlen(s) + 1);
 	while (s[i] && i < nb)
 	{
 		dup[i] = s[i];
@@ -70,16 +70,16 @@ char	*ft_strndup(const char *s, int nb)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int			i;
-	int			j;
-	char		*join;
+	int		i;
+	int		j;
+	char	*join;
 
 	i = 0;
 	j = 0;
-	join = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	join = (char *)malloc(sizeof(char) * (ft_strlen(s1) + strlen(s2) + 1));
 	if (!join)
 		return (NULL);
-	while (s1[i])
+	while (s1[i] && s1 != NULL)
 	{
 		join[i] = s1[i];
 		i++;
@@ -91,35 +91,53 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	join[i] = '\0';
+	free((char *)s1);
 	return (join);
 }
 
 char	*get_next_line(int fd)
 {
-	static char buffer[BUFFER_SIZE];
-	char *line;
-	char *temp;
-	int	pos;
-	int i;
+	static char	buffer[BUFFER_SIZE];
+	char		*line;
+	char		*temp;
+	int			pos;
+	int			i;
+	int			reed;
 
 	line = NULL;
-	temp = NULL;
 	pos = 0;
 	i = 0;
-	while (strchr(buffer, '\n') == NULL)
+	reed = BUFFER_SIZE;
+	temp = strdup(buffer);
+	if (fd < 0)
 	{
-			temp = ft_strdup(buffer, ft_strlen(buffer));
-			read(fd, buffer, BUFFER_SIZE);
-			temp = ft_strjoin(temp, buffer);
+		free(temp);
+		return (NULL);
 	}
+	if (strchr(buffer, '\n') == NULL)
+	{
+		while (strchr(buffer, '\n') == NULL && reed == BUFFER_SIZE)
+		{
+			reed = read(fd, buffer, BUFFER_SIZE);
+			if (reed == 0)
+			{
+				free(temp);
+				return (NULL);
+			}
+			if (reed == BUFFER_SIZE)
+				temp = ft_strjoin(temp, buffer);
+		}
+	}
+	else
+		temp = strdup(buffer);
 	if ((pos = ft_strchr_int(temp, '\n')) >= 0)
-	{
 		line = strndup(temp, pos + 1);
-	}
+	else
+		line = strdup(temp);
 	pos++;
-	if (ft_strchr_int(buffer, '\n') > 0)
+	if (ft_strchr_int(buffer, '\n') >= 0)
 	{
-		if (ft_strlen(temp) > BUFFER_SIZE)
+		if (strlen(temp) > BUFFER_SIZE)
 		{
 			while (temp[pos])
 			{
@@ -127,8 +145,8 @@ char	*get_next_line(int fd)
 				pos++;
 				i++;
 			}
-		temp[i] = '\0';
-		strcpy(buffer, temp);
+			temp[i] = '\0';
+			strcpy(buffer, temp);
 		}
 		else
 		{
@@ -138,26 +156,27 @@ char	*get_next_line(int fd)
 				pos++;
 				i++;
 			}
-		buffer[i] = '\0';
+			buffer[i] = '\0';
 		}
 	}
+	free(temp);
 	return (line);
 }
 
-int main(void)
+int	main(void)
 {
 	int fd;
-	
-	fd = open("./lol.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	//printf("%s", get_next_line(fd));
-	//printf("%s", get_next_line(fd));
-	//printf("%s", get_next_line(fd));
-	//printf("%s", get_next_line(fd));
-	//printf("%s", get_next_line(fd));
-	//printf("%s", get_next_line(fd));
+	char *line;
+	int i;
 
-	return 0;
+	i = 0;
+	fd = open("./lol.txt", O_RDONLY);
+	while (i <= 4)
+	{
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
+	i++;
+	}
+	return (0);
 }

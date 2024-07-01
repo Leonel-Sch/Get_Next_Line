@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leonel <leonel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lscheupl <lscheupl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:34:52 by leonel            #+#    #+#             */
-/*   Updated: 2024/06/25 14:11:22 by leonel           ###   ########.fr       */
+/*   Updated: 2024/07/01 19:15:57 by lscheupl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-# define BUFFER_SIZE 8
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1
+#endif
 
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
