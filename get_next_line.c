@@ -6,7 +6,7 @@
 /*   By: lscheupl <lscheupl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:34:49 by leonel            #+#    #+#             */
-/*   Updated: 2024/07/02 18:29:15 by lscheupl         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:11:39 by lscheupl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,44 @@ char	*get_next_line(int fd)
 
 //	i = 0;
 //	fd = open("./lol.txt", O_RDONLY);
-//	while (i <= 6)
-//	{
 //		line = get_next_line(fd);
 //		printf("%s", line);
 //		free(line);
-//		i++;
-//	}
+
+//		line = get_next_line(fd);
+//		printf("%s", line);
+//		free(line);
+
+//		line = get_next_line(fd);
+//		printf("%s", line);
+//		free(line);
+
+//		line = get_next_line(fd);
+//		printf("%s", line);
+//		free(line);
+
+//		close(fd);
+
+//		line = get_next_line(fd);
+//		printf("%s", line);
+//		free(line);
+
+//		fd = open("./lol.txt", O_RDONLY);
+
+//		line = get_next_line(fd);
+//		printf("%s", line);
+//		free(line);
+
+//		line = get_next_line(fd);
+//		printf("%s", line);
+//		free(line);
+
+//	//while (i <= 6)
+//	//{
+//	//	line = get_next_line(fd);
+//	//	printf("%s", line);
+//	//	free(line);
+//	//	i++;
+//	//}
 //	return (0);
 //}

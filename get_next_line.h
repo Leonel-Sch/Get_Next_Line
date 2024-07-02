@@ -6,7 +6,7 @@
 /*   By: lscheupl <lscheupl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:34:52 by leonel            #+#    #+#             */
-/*   Updated: 2024/07/02 18:23:35 by lscheupl         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:10:42 by lscheupl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <string.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10000000
+#  define BUFFER_SIZE 10
 # endif
 
 size_t	ft_strlen(const char *str);
