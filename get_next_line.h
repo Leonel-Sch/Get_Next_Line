@@ -6,7 +6,7 @@
 /*   By: lscheupl <lscheupl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:34:52 by leonel            #+#    #+#             */
-/*   Updated: 2024/07/02 19:10:42 by lscheupl         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:43:01 by lscheupl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*get_next_line(int fd);
 int		ft_strchr_int(const char *s, int c);
 char	*ft_strndup(const char *s, int nb);
 char	*ft_strcpy(char *dest, char *src);
-
-
+void	ft_error(char *buffer, char *temp);
 
 #endif

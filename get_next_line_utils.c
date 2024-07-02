@@ -6,7 +6,7 @@
 /*   By: lscheupl <lscheupl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 11:34:44 by leonel            #+#    #+#             */
-/*   Updated: 2024/07/02 18:25:42 by lscheupl         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:53:16 by lscheupl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_strlen(const char *str)
 
 int	ft_strchr_int(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != c && s[i])
@@ -91,15 +91,17 @@ char	*ft_strndup(const char *s, int nb)
 	}
 	return (dup);
 }
-char *ft_strcpy(char *dest, char *src)
+
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
 	i = 0;
-	while(src[i])
+	while (src[i])
 	{
 		dest[i] = src[i];
 		i++;
 	}
-	return(dest);
+	dest[i] = '\0';
+	return (dest);
 }
